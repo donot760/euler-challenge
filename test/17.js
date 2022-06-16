@@ -6,8 +6,9 @@ describe("17", function() {
     // Converting positive integers up to 1000 (exclusive) into words
     describe("threeDigitNumberToWord", function() {
         /**
-         * Partition on number of digits
-         *     - single digit
+         * Partition on value and number of digits
+         *     - 0
+         *     - single digit, non-zero
          *     - double digits, less than 20
          *     - double digits, greater than or equal to 20
          *     - triple digits
@@ -25,6 +26,15 @@ describe("17", function() {
          *     - yes
          *     - no
          */
+        it("zero", function() {
+            // shall return empty string
+            const number = 0;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
         it("single digit", function(){
             const number = 4;
             const wordForNumber = threeDigitNumberToWord(number);
