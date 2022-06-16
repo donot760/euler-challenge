@@ -175,7 +175,7 @@ describe("17", function() {
         });
 
         it("between one trillion and one quadrillion", function(){
-            const number = 543;
+            const number = 543000543000543;
             const wordForNumber = numberToWord(number);
             const correctWordForNumber = "five hundred and fourty-three trillion five hundred and fourty-three million five hundred and fourty-three";
             assert.strictEqual(wordForNumber, correctWordForNumber,
