@@ -1,9 +1,9 @@
-import { numberLetterCounts } from "../src/17/solution.js";
+import { numberLetterCounts, threeDigitNumberToWord } from "../src/17/solution.js";
 import assert from "assert";
 
 
 describe("17", function() {
-    // Converting positive integers up to 1000 exclusive into words
+    // Converting positive integers up to 1000 (exclusive) into words
     describe("threeDigitNumberToWord", function() {
         /**
          * Partition on number of digits
@@ -14,7 +14,7 @@ describe("17", function() {
          *
          * Partition on largest multiple of 10 dividing the number:
          *     - not divisible by 10
-         *     - divisible by 10 but not 100
+         *     - divisible by 10 but not by 100
          *     - divisible by 100
          *
          * Partititon on whether name contains a hyphen: (ex: twenty-four)
@@ -25,8 +25,60 @@ describe("17", function() {
          *     - yes
          *     - no
          */
-        it("just a random test", function(){
-            true;
+        it("single digit", function(){
+            const number = 4;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "four";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("double digits, less than 20, not divisible by 10", function(){
+            const number = 13;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "thirteen";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("double digits, greater than 20, not divisible by 10, spelled with dash", function(){
+            const number = 67;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "sixty-seven";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("double digits, greater than 20, divisible by 10", function(){
+            const number = 80;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "eighty";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("100 (edge case)", function(){
+            const number = 100;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "one hundred";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("triple digits, divisible by 100", function(){
+            const number = 300;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "three hundred";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
+        });
+
+        it("triple digits, not divisible by ten, spellen with `and`", function(){
+            const number = 666;
+            const wordForNumber = threeDigitNumberToWord(number);
+            const correctWordForNumber = "six hundred and sixty-six";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected threeDigitNumberToWord to return the correct name for the number");
         });
     });
 
