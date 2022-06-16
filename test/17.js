@@ -1,4 +1,4 @@
-import { numberLetterCounts, threeDigitNumberToWord } from "../src/17/solution.js";
+import { numberLetterCounts, numberToWord, threeDigitNumberToWord } from "../src/17/solution.js";
 import assert from "assert";
 
 
@@ -6,6 +6,8 @@ describe("17", function() {
     // Converting positive integers up to 1000 (exclusive) into words
     describe("threeDigitNumberToWord", function() {
         /**
+         * TESTING STRATEGY
+         *
          * Partition on value and number of digits
          *     - 0
          *     - single digit, non-zero
@@ -94,14 +96,98 @@ describe("17", function() {
 
     // Converting positive integers up to a quadrillion, exclusive into words
     describe("numberToWord", function() {
-        it("just a random test", function(){
-            true;
+        /**
+         * TESTING STRATEGY
+         *
+         * Partition on value of n
+         *      - 0 < n < 10^3
+         *      - n = 10^3
+         *      - 10^3 < n < 10^6
+         *      - n = 10^6
+         *      - 10^6 < n < 10^9
+         *      - n = 10^9
+         *      - 10^9 < n < 10^12
+         *      - n = 10^12
+         *      - 10^12 < n < 10^15
+         */
+        it("under a thousand", function(){
+            const number = 420;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "four hundred and twenty";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("one thousand", function(){
+            const number = 1000;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "one thousand";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("between one thousand and one million", function(){
+            const number = 32010;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "thirty-two thousand ten";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("one million", function(){
+            const number = 1000000;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "one million";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("between one million and one billion", function(){
+            const number = 4040404;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "four million fourty thousand four hundred and four";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("one billion", function(){
+            const number = 1000000000;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "one billion";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("between one billion and one trillion", function(){
+            const number = 12345678900;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "twelve billion three hundred and fourty-five million six hundred and seventy-eight thousand nine hundred";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("one trillion", function(){
+            const number = 1000000000000;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "one trillion";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
+        });
+
+        it("between one trillion and one quadrillion", function(){
+            const number = 543;
+            const wordForNumber = numberToWord(number);
+            const correctWordForNumber = "five hundred and fourty-three trillion five hundred and fourty-three million five hundred and fourty-three";
+            assert.strictEqual(wordForNumber, correctWordForNumber,
+                "Expected numberToWord to return the correct name for the number");
         });
     });
 
     // Counts how many letters (not uniquely-counted) are needed to spell all numbers up to `limit`
     describe("numberLetterCount", function() {
         /**
+         * TESTING STRATEGY
+         *
          * Uses same values as the tests available at freeCodeCamp
          */
         it("5", function() {
