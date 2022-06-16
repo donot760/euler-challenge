@@ -8,4 +8,4 @@ Completing the Euler 100 coding challenge from freeCodeCamp (https://www.freecod
 
 src contains all the solved problems. Each problem is in its own directory. Both the instructions and the solution are provided. I used the web interface and the provided test to solve the problems and am documenting the solutions here.
 
-Some problems that were trickier required me to design my own test suite, which can be found in the "test" directory under a file with the problwm number. To run the test suite for a given problem, run `npx mocha -f problem_number` in the terminal.
+Some problems that were trickier required me to design my own test suite, which can be found in the "test" directory under a file with the problem number. To run the test suite for a given problem, run `npm test problem_number` (same as `npx mocha test/problem_number`) in the terminal.
