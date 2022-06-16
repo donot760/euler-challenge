@@ -29,7 +29,7 @@ const TENS = [
     '',
     'twenty',
     'thirty',
-    'fourty',
+    'forty',
     'fifty',
     'sixty',
     'seventy',
@@ -126,7 +126,12 @@ export function numberToWord(n){
 
 export function numberLetterCounts(limit) {
 
-    return true;
+    if (limit === 0) {
+        return 0;
+    }
+
+    const wordForLimit = numberToWord(limit).replaceAll("-", "").replaceAll(" ", "");
+    return wordForLimit.length + numberLetterCounts(limit-1);
   }
 
   numberLetterCounts(5);

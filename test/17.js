@@ -145,7 +145,7 @@ describe("17", function() {
         it("between one million and one billion", function(){
             const number = 4040404;
             const wordForNumber = numberToWord(number);
-            const correctWordForNumber = "four million fourty thousand four hundred and four";
+            const correctWordForNumber = "four million forty thousand four hundred and four";
             assert.strictEqual(wordForNumber, correctWordForNumber,
                 "Expected numberToWord to return the correct name for the number");
         });
@@ -161,7 +161,7 @@ describe("17", function() {
         it("between one billion and one trillion", function(){
             const number = 12345678900;
             const wordForNumber = numberToWord(number);
-            const correctWordForNumber = "twelve billion three hundred and fourty-five million six hundred and seventy-eight thousand nine hundred";
+            const correctWordForNumber = "twelve billion three hundred and forty-five million six hundred and seventy-eight thousand nine hundred";
             assert.strictEqual(wordForNumber, correctWordForNumber,
                 "Expected numberToWord to return the correct name for the number");
         });
@@ -177,7 +177,7 @@ describe("17", function() {
         it("between one trillion and one quadrillion", function(){
             const number = 543000543000543;
             const wordForNumber = numberToWord(number);
-            const correctWordForNumber = "five hundred and fourty-three trillion five hundred and fourty-three million five hundred and fourty-three";
+            const correctWordForNumber = "five hundred and forty-three trillion five hundred and forty-three million five hundred and forty-three";
             assert.strictEqual(wordForNumber, correctWordForNumber,
                 "Expected numberToWord to return the correct name for the number");
         });
@@ -192,18 +192,17 @@ describe("17", function() {
          */
         it("5", function() {
             const numberOfLetters = numberLetterCounts(5);
-            assert.isNumber(numberOfLetters, "Expected numberLetterCounts to return a number");
             assert.strictEqual(numberOfLetters, 19, "Expected the correct number of letters");
         });
 
         it("150", function() {
             const numberOfLetters = numberLetterCounts(150);
-            assert.strictEqual(numberOfLetters, 19, "Expected the correct number of letters");
+            assert.strictEqual(numberOfLetters, 1903, "Expected the correct number of letters");
         });
 
         it("1000", function() {
             const numberOfLetters = numberLetterCounts(1000);
-            assert.strictEqual(numberOfLetters, 19, "Expected the correct number of letters");
+            assert.strictEqual(numberOfLetters, 21124, "Expected the correct number of letters");
         });
     });
 });
