@@ -1,14 +1,14 @@
-export var DAYS_OF_THE_WEEK;
-(function (DAYS_OF_THE_WEEK) {
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Monday"] = 0] = "Monday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Tuesday"] = 1] = "Tuesday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Wednesday"] = 2] = "Wednesday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Thursday"] = 3] = "Thursday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Friday"] = 4] = "Friday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Saturday"] = 5] = "Saturday";
-    DAYS_OF_THE_WEEK[DAYS_OF_THE_WEEK["Sunday"] = 6] = "Sunday";
-})(DAYS_OF_THE_WEEK || (DAYS_OF_THE_WEEK = {}));
-const daysOfTheWeek = [
+export enum DAYS_OF_THE_WEEK {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+
+const daysOfTheWeek : ReadonlyArray<DAYS_OF_THE_WEEK> = [
     DAYS_OF_THE_WEEK.Monday,
     DAYS_OF_THE_WEEK.Tuesday,
     DAYS_OF_THE_WEEK.Wednesday,
@@ -17,11 +17,14 @@ const daysOfTheWeek = [
     DAYS_OF_THE_WEEK.Saturday,
     DAYS_OF_THE_WEEK.Sunday
 ];
-export function isLeapYear(year) {
-    return year % 4 === 0 && (year % 400 === 0 || year % 100 !== 0);
+
+
+export function isLeapYear(year: number): boolean {
+    return year%4 === 0 && (year%400 === 0 ||  year%100 !== 0);
 }
-export function getDaysInTheMonth(month, year) {
-    switch (month) {
+
+export function getDaysInTheMonth(month: number, year: number): number {
+    switch(month) {
         case 0: // January
             return 31;
         case 1: // February
@@ -53,6 +56,7 @@ export function getDaysInTheMonth(month, year) {
             throw Error("Number out of range");
     }
 }
+
 /**
  * Given a date, returns the day of the week on that date.
  *
@@ -62,28 +66,34 @@ export function getDaysInTheMonth(month, year) {
  *
  * @returns day of the week, 0-indexed
  */
-export function getDayOfTheWeekFromDate(date, month, year) {
+export function getDayOfTheWeekFromDate(date: number, month: number, year: number): DAYS_OF_THE_WEEK {
     let daysSinceBeginningOf1900 = 0;
+
     // add all days in the completed years since 1900
     for (let currentYear = 1900; currentYear < year; currentYear++) {
         for (let currentMonth = 0; currentMonth < 12; currentMonth++) {
             daysSinceBeginningOf1900 += getDaysInTheMonth(currentMonth, currentYear);
         }
     }
+
     // add days from current year's completed months
     for (let currentMonth = 0; currentMonth < month; currentMonth++) {
         daysSinceBeginningOf1900 += getDaysInTheMonth(currentMonth, year);
     }
+
     // add days from the current month
-    daysSinceBeginningOf1900 += date - 1; // -1 to make up for the 1-indexing in the human way of counting days
-    const dayOfTheWeek = daysOfTheWeek[daysSinceBeginningOf1900 % 7];
+    daysSinceBeginningOf1900 += date-1; // -1 to make up for the 1-indexing in the human way of counting days
+
+    const dayOfTheWeek = daysOfTheWeek[daysSinceBeginningOf1900%7];
     return dayOfTheWeek;
 }
-export function countingSundays(firstYear, lastYear) {
+
+
+export function countingSundays(firstYear: number, lastYear: number): number {
     const date = 1;
     const dayOfTheWeek = DAYS_OF_THE_WEEK.Sunday;
     let numberOfSundays = 0;
-    for (let year = firstYear; year <= lastYear; year++) {
+    for (let year = firstYear; year <= lastYear; year ++) {
         for (let month = 0; month < 12; month++) {
             const weekday = getDayOfTheWeekFromDate(date, month, year);
             if (weekday === dayOfTheWeek) {
@@ -93,4 +103,5 @@ export function countingSundays(firstYear, lastYear) {
     }
     return numberOfSundays;
 }
+
 //console.log(countingSundays(1943, 1946));
