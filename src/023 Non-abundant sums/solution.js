@@ -1,29 +1,20 @@
-function getAllDivisors(n){
-    if (n === 1) {
-        return [];
+function isAnAbundantNumber(n) {
+    if (n <= 1) {
+        return false;
     }
-
-    let divisors = [1];
+    let sumOfDivisors = 1;
     const squareRoot = Math.sqrt(n);
-    for (let ii = 2; ii<squareRoot; ii++){
+    for (let ii = 2; ii < squareRoot; ii++){
       if (n % ii === 0) {
-        divisors.push(ii);
-        divisors.push(n/ii);
+        sumOfDivisors += ii;
+        sumOfDivisors += n/ii;
       }
     }
     //make sure squareRoot is only included once
     if (Math.floor(squareRoot) === squareRoot) {
-        divisors.push(squareRoot);
+        sumOfDivisors += squareRoot;
     }
-    return divisors;
-}
-
-function getSumOfDivisors(n) {
-    return getAllDivisors(n).reduce((x,y) => x+y, 0);
-}
-
-function isAnAbundantNumber(n) {
-    return getSumOfDivisors(n) > n;
+    return sumOfDivisors > n;
 }
 
 function sumOfNonAbundantNumbers(n) {
