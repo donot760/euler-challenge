@@ -28,11 +28,12 @@ function isAnAbundantNumber(n) {
 
 function sumOfNonAbundantNumbers(n) {
     // Make an array to hold the information whether a number can be written
-    // as a sum of two numbers. Numbers are represented by the index, 0 is set
-    // as false by default to account for the 1-indexing
+    // as a sum of two abundant numbers. Numbers are represented by the index,
+    // 0 is set as false by default to account for the 1-indexing
     const canBeASumOfTwoAbundantNumbers = [false];
     for (let ii = 1; ii <= n; ii++) {
-        canBeASumOfTwoAbundantNumbers.push(false); // set false as placeholder
+        // set false as placeholder, will be revisited later
+        canBeASumOfTwoAbundantNumbers.push(false);
     }
 
     const abundantNumbers = [];
@@ -42,11 +43,9 @@ function sumOfNonAbundantNumbers(n) {
         }
     }
 
-    console.log(abundantNumbers);
-
     for (let ii = 0; ii <= abundantNumbers.length; ii++){
-        for (let jj = ii; jj <= abundantNumbers.length; jj++) {
-            const abundantNumber1 = abundantNumbers[ii];
+        const abundantNumber1 = abundantNumbers[ii];
+        for (let jj = ii; jj <= abundantNumbers.length; jj++){
             const abundantNumber2 = abundantNumbers[jj];
             const sum = abundantNumber1 + abundantNumber2;
             if (sum <= n) {
@@ -57,16 +56,6 @@ function sumOfNonAbundantNumbers(n) {
             }
         }
     }
-
-
-    // for (const abundantNumber1 of abundantNumbers) {
-    //     for (const abundantNumber2 of abundantNumbers) {
-    //         const sum = abundantNumber1 + abundantNumber2;
-    //         if (sum <= n) {
-    //             canBeASumOfTwoAbundantNumbers[sum] = true;
-    //         }
-    //     }
-    // }
 
     let resultSum = 0;
     for (let ii = 1; ii <= n; ii ++) {
